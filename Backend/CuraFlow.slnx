@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CuraFlow.Api/CuraFlow.Api.csproj" />
+    <Project Path="src/CuraFlow.Application/CuraFlow.Application.csproj" />
+    <Project Path="src/CuraFlow.Domain/CuraFlow.Domain.csproj" />
+    <Project Path="src/CuraFlow.Infrastructure/CuraFlow.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CuraFlow.Api.IntegrationTests/CuraFlow.Api.IntegrationTests.csproj" />
+    <Project Path="tests/CuraFlow.Application.SubcutaneousTests/CuraFlow.Application.SubcutaneousTests.csproj" />
+    <Project Path="tests/CuraFlow.Application.UnitTests/CuraFlow.Application.UnitTests.csproj" />
+    <Project Path="tests/CuraFlow.Domain.UnitTests/CuraFlow.Domain.UnitTests.csproj" />
+    <Project Path="tests/CuraFlow.Tests.Common/CuraFlow.Tests.Common.csproj" />
+  </Folder>
+</Solution>

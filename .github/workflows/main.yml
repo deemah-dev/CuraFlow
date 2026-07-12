@@ -1,0 +1,29 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore Backend/CuraFlow.slnx
+
+    - name: Build solution
+      run: dotnet build Backend/CuraFlow.slnx --configuration Release --no-restore
+
+    - name: Run tests
+      run: dotnet test Backend/CuraFlow.slnx --configuration Release --no-build --verbosity normal
