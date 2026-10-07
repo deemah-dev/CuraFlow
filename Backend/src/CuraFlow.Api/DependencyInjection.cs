@@ -1,3 +1,6 @@
+using CuraFlow.Api.Services;
+using CuraFlow.Application.Common.Interfaces;
+
 namespace CuraFlow.Api;
 
 public static class DependencyInjection
@@ -15,6 +18,13 @@ public static class DependencyInjection
                 policy =>
                 policy
                 .WithOrigins("http://localhost:7071").AllowAnyMethod().AllowAnyHeader()));
+        return services;
+    }
+
+    private static IServiceCollection AddCurrentUser(this IServiceCollection services)
+    {
+        services.AddScoped<ICurrentUser, CurrentUser>();
+        services.AddHttpContextAccessor();
         return services;
     }
 }

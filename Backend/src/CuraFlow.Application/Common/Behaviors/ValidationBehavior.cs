@@ -23,7 +23,7 @@ public class ValidationBehavior<TRequest, TResponse>
 
         if (validatiorResult.IsValid)
         {
-            return await next();
+            return await next(cancellationToken);
         }
 
         var errors = validatiorResult.Errors

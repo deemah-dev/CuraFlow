@@ -18,19 +18,17 @@ public static class Result
 
 public sealed class Result<TValue> : IResult<TValue>
 {
-    private readonly TValue? value = default;
-    private readonly List<Error>? errors = null;
+    private readonly List<Error>? _errors = null;
 
-    public TValue Value => IsSuccess ? value! : default!;
-    public List<Error> Errors => IsError ? errors! : [];
-    public Error TopError => (errors?.Count > 0) ? errors[0] : default;
-
+    public TValue Value { get => IsSuccess ? field! : default!; } = default;
+    public List<Error> Errors => IsError ? _errors! : [];
+    public Error TopError => (_errors?.Count > 0) ? _errors[0] : default;
     public bool IsSuccess { get; }
     public bool IsError => !IsSuccess;
 
     private Result(Error error)
     {
-        this.errors = [error];
+        _errors = [error];
         IsSuccess = false;
     }
 
@@ -41,7 +39,7 @@ public sealed class Result<TValue> : IResult<TValue>
             throw new ArgumentException("Cannot create and Error<TValue> from an empty collection of errors. Provide at least one error.", nameof(errors));
         }
 
-        this.errors = errors;
+        _errors = errors;
         IsSuccess = false;
     }
 
@@ -52,8 +50,8 @@ public sealed class Result<TValue> : IResult<TValue>
             throw new ArgumentNullException(nameof(value));
         }
 
-        this.value = value;
-        this.errors = [];
+        Value = value;
+        _errors = [];
         IsSuccess = true;
     }
 
@@ -74,9 +72,9 @@ public sealed class Result<TValue> : IResult<TValue>
     {
         if (isSuccess)
         {
-            this.value = value ?? throw new ArgumentNullException(nameof(value));
-            this.errors = [];
-            this.IsSuccess = true;
+            Value = value ?? throw new ArgumentNullException(nameof(value));
+            _errors = [];
+            IsSuccess = true;
         }
         else
         {
@@ -85,7 +83,7 @@ public sealed class Result<TValue> : IResult<TValue>
                 throw new ArgumentException("Cannot create and Error<TValue> from an empty collection of errors. Provide at least one error.", nameof(errors));
             }
 
-            this.errors = errors;
+            _errors = errors;
             IsSuccess = false;
         }
     }

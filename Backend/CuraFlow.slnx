@@ -4,6 +4,7 @@
     <Project Path="src/CuraFlow.Application/CuraFlow.Application.csproj" />
     <Project Path="src/CuraFlow.Domain/CuraFlow.Domain.csproj" />
     <Project Path="src/CuraFlow.Infrastructure/CuraFlow.Infrastructure.csproj" />
+    <Project Path="src/CuraFlow.Contracts/CuraFlow.Contracts.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/CuraFlow.Api.IntegrationTests/CuraFlow.Api.IntegrationTests.csproj" />
