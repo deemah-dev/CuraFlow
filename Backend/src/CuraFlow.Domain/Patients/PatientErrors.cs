@@ -1,0 +1,1 @@
+namespace CuraFlow.Domain.Patients;
