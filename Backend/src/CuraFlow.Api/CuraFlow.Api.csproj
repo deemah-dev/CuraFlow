@@ -3,4 +3,13 @@
     <ProjectReference Include="..\CuraFlow.Application\CuraFlow.Application.csproj" />
     <ProjectReference Include="..\CuraFlow.Infrastructure\CuraFlow.Infrastructure.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
 </Project>
