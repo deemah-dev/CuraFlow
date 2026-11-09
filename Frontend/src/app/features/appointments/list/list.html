@@ -1,0 +1,106 @@
+<div class="min-h-screen bg-[#000000] text-[#f5f5f7] py-12 px-4 sm:px-6 lg:px-8 dir-ltr text-left">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header Section -->
+    <div
+      class="flex flex-col md:flex-row justify-between items-center mb-10 border-b border-[#73430b]/30 pb-6"
+    >
+      <div>
+        <h1
+          class="text-3xl md:text-4xl font-extrabold tracking-wide bg-linear-to-r from-[#73430b] via-[#fff8c2] to-[#b38024] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(255,248,194,0.35)]"
+        >
+          Appointments Management
+        </h1>
+        <p class="text-sm text-gray-400 mt-2">View and manage all scheduled medical appointments</p>
+      </div>
+
+      <div class="mt-4 md:mt-0">
+        <button
+          class="px-6 py-3 rounded-lg font-semibold bg-linear-to-r from-[#73430b] to-[#b38024] text-[#000000] hover:from-[#94570f] hover:to-[#73430b] transition-all duration-300 shadow-[0_0_25px_rgba(182,128,36,0.3)] hover:shadow-[0_0_25px_rgba(182,128,36,0.6)] transform hover:-translate-y-0.5"
+        >
+          + New Appointment
+        </button>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="flex justify-center items-center py-24">
+      <div class="text-[#fff8c2] text-lg animate-pulse tracking-wider">Loading appointments...</div>
+    </div>
+
+    <!-- Error State -->
+    <div
+      *ngIf="errorMessage"
+      class="bg-red-950/40 border border-red-500/50 text-red-200 px-6 py-4 rounded-xl mb-6 shadow-lg"
+    >
+      {{ errorMessage }}
+    </div>
+
+    <!-- Data Table Container -->
+    <div
+      *ngIf="!isLoading && appointments.values && appointments.values.length > 0"
+      class="custom-card overflow-hidden"
+    >
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr
+              class="border-b border-[#73430b]/40 bg-[#0d0d0d]/80 text-[#fff8c2] text-sm uppercase tracking-wider"
+            >
+              <th class="py-4 px-6">Appointment ID</th>
+              <th class="py-4 px-6">Date & Time</th>
+              <th class="py-4 px-6">Patient ID</th>
+              <th class="py-4 px-6">Doctor ID</th>
+              <th class="py-4 px-6">Status</th>
+              <th class="py-4 px-6 text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#73430b]/20">
+            <tr
+              *ngFor="let apt of appointments.values"
+              class="hover:bg-[#121212] transition-colors duration-200"
+            >
+              <td class="py-4 px-6 font-medium text-gray-200">#{{ apt.appointmentId }}</td>
+              <td class="py-4 px-6 text-gray-300">{{ apt.appoinmentDate | date: 'medium' }}</td>
+              <td class="py-4 px-6 text-gray-400 text-sm">{{ apt.patientId }}</td>
+              <td class="py-4 px-6 text-gray-400 text-sm">{{ apt.doctorId }}</td>
+              <td class="py-4 px-6">
+                <span class="tech-tag"> Status: {{ apt.status }} </span>
+              </td>
+              <td class="py-4 px-6 text-center space-x-2">
+                <!-- Delete Button Only -->
+                <button
+                  (click)="onDelete(apt.appointmentId)"
+                  class="px-3 py-1.5 text-xs rounded-md border border-red-500/30 text-red-300 hover:bg-red-600 hover:text-white transition-all"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination Footer -->
+      <div
+        class="flex justify-between items-center px-6 py-4 bg-[#080808] border-t border-[#73430b]/20 text-sm text-gray-400"
+      >
+        <div>Page {{ appointments.page }} (Size: {{ appointments.size }})</div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div
+      *ngIf="
+        !isLoading && (!appointments.values || appointments.values.length === 0) && !errorMessage
+      "
+      class="custom-card text-center py-20 px-6"
+    >
+      <p class="text-gray-400 text-lg mb-4">No appointments found.</p>
+      <button
+        class="px-5 py-2.5 rounded-lg border border-[#b38024]/40 text-[#fff8c2] hover:border-[#fff8c2] transition-all duration-300"
+      >
+        Create First Appointment
+      </button>
+    </div>
+  </div>
+</div>

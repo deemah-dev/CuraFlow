@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CuraFlow.Domain.Common;
 
@@ -15,6 +16,9 @@ public class Entity
     }
 
     public Guid Id { get; }
+    public Guid TenantId { get; set; }
+
+    [NotMapped]
     public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
     private readonly List<DomainEvent> _domainEvents = [];
 

@@ -1,0 +1,103 @@
+<div class="custom-card p-6 max-w-xl mx-auto">
+  <h3 class="text-xl font-bold text-[#fff8c2] mb-6">Create New Appointment</h3>
+
+  <div
+    *ngIf="errorMessage"
+    class="bg-red-950/40 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg mb-4 text-sm"
+  >
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Appointment Date & Time -->
+    <div>
+      <label class="block text-sm font-medium text-gray-300 mb-2">Appointment Date & Time</label>
+      <input
+        type="datetime-local"
+        formControlName="appoinmentDate"
+        class="w-full bg-[#0a0a0a] border border-[#73430b]/40 rounded-lg px-4 py-2.5 text-white focus:border-[#b38024] focus:outline-none transition-all"
+      />
+      <div
+        *ngIf="
+          createForm.get('appoinmentDate')?.touched && createForm.get('appoinmentDate')?.invalid
+        "
+        class="text-red-400 text-xs mt-1"
+      >
+        Appointment date is required.
+      </div>
+    </div>
+
+    <!-- Doctor ID -->
+    <div>
+      <label class="block text-sm font-medium text-gray-300 mb-2">Doctor ID</label>
+      <input
+        type="text"
+        formControlName="doctorId"
+        placeholder="Enter doctor ID"
+        class="w-full bg-[#0a0a0a] border border-[#73430b]/40 rounded-lg px-4 py-2.5 text-white focus:border-[#b38024] focus:outline-none transition-all"
+      />
+      <div
+        *ngIf="createForm.get('doctorId')?.touched && createForm.get('doctorId')?.invalid"
+        class="text-red-400 text-xs mt-1"
+      >
+        Doctor ID is required.
+      </div>
+    </div>
+
+    <!-- Medical Department ID -->
+    <div>
+      <label class="block text-sm font-medium text-gray-300 mb-2">Medical Department ID</label>
+      <input
+        type="text"
+        formControlName="medicalDepartmentId"
+        placeholder="Enter medical department ID"
+        class="w-full bg-[#0a0a0a] border border-[#73430b]/40 rounded-lg px-4 py-2.5 text-white focus:border-[#b38024] focus:outline-none transition-all"
+      />
+      <div
+        *ngIf="
+          createForm.get('medicalDepartmentId')?.touched &&
+          createForm.get('medicalDepartmentId')?.invalid
+        "
+        class="text-red-400 text-xs mt-1"
+      >
+        Medical Department ID is required.
+      </div>
+    </div>
+
+    <!-- Patient ID -->
+    <div>
+      <label class="block text-sm font-medium text-gray-300 mb-2">Patient ID</label>
+      <input
+        type="text"
+        formControlName="patientId"
+        placeholder="Enter patient ID"
+        class="w-full bg-[#0a0a0a] border border-[#73430b]/40 rounded-lg px-4 py-2.5 text-white focus:border-[#b38024] focus:outline-none transition-all"
+      />
+      <div
+        *ngIf="createForm.get('patientId')?.touched && createForm.get('patientId')?.invalid"
+        class="text-red-400 text-xs mt-1"
+      >
+        Patient ID is required.
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex justify-end space-x-3 pt-4">
+      <button
+        type="button"
+        (click)="onCancel()"
+        class="px-4 py-2 rounded-lg border border-gray-600 text-gray-300 hover:bg-gray-800 transition-all text-sm"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="submit"
+        [disabled]="isSubmitting"
+        class="px-6 py-2 rounded-lg font-semibold bg-linear-to-r from-[#73430b] to-[#b38024] text-[#000000] hover:from-[#94570f] hover:to-[#73430b] transition-all text-sm disabled:opacity-50"
+      >
+        {{ isSubmitting ? 'Creating...' : 'Create Appointment' }}
+      </button>
+    </div>
+  </form>
+</div>

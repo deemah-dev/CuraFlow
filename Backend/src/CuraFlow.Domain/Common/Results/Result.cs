@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 namespace CuraFlow.Domain.Common.Results;
 
 public readonly record struct Success;
+public readonly record struct Failure;
 public readonly record struct Created;
 public readonly record struct Deleted;
 public readonly record struct Updated;
@@ -14,6 +15,7 @@ public static class Result
     public static Created Created => default;
     public static Deleted Deleted => default;
     public static Updated Updated => default;
+    public static Failure Failure<T>(Error error) => default;
 }
 
 public sealed class Result<TValue> : IResult<TValue>
